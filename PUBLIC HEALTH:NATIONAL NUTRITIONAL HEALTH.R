@@ -71,8 +71,15 @@ ggplot(cleaned_nhanes,
        x='Height', y='Weight') 
 + theme_minimal()
 
+#conducting t-test between the following variables:
+#Age and Gender
+#BMI and Diabetes
+#Alcohol Year and Relationship Status
+#and making conclusions on the relationship between them based on P-Value
 
-
+#Age and Gender
+t.test(Age ~ Gender, data = cleaned_nhanes)
+#BMI and Diabetes
 
 
 
