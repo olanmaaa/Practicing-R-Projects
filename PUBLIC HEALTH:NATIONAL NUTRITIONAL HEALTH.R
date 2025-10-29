@@ -4,6 +4,9 @@ nhanes.data <- (read.csv("https://raw.githubusercontent.com/HackBio-Internship/p
 #replacing all missing data with '0' 
 cleaned_nhanes <- replace(nhanes.data, is.na(nhanes.data), 0)
 
+#viewing data summary 
+summary(cleaned_nhanes)
+
 #creating histograms to visualize the distribution of BMI, Weight(in kg), Weight (in lbs)
 #firstly create a new column in the df to represent Weight in pounds i.e Weight in kg * 2.2
 cleaned_nhanes$WeightInPounds <- cleaned_nhanes$Weight * 2.2
@@ -41,6 +44,32 @@ hist(cleaned_nhanes$Age,
      ylab='Frequency', 
      col='steelblue', 
      border='black')
+
+#determining the mean pulse for all participants
+mean_pulse <- mean(cleaned_nhanes$Pulse)
+#the mean pulse across all participants is 63.06
+
+#determining the range of the Diastolic Blood Pressure across all participants
+range(cleaned_nhanes$BPDia)
+#the range is 0-116
+
+#determining the variance and standard deviation of income across all participants 
+income_variance <- var(cleaned_nhanes$Income)
+income_sd <- sd(cleaned_nhanes$Income)
+
+#visualizing the relationship between weight and height using scatterplot
+#color the points according to:gender,diabetes & smoking status
+library(ggplot2)
+ggplot(cleaned_nhanes, 
+       aes(x=Height, 
+           y=Weight, 
+           colour=Gender, 
+           shape=Diabetes)) 
++ geom_point(size=3,alpha=0.7) 
++ facet_wrap(~SmokingStatus) 
++ labs(title='Weight vs Height Colored by Diabetes Status', 
+       x='Height', y='Weight') 
++ theme_minimal()
 
 
 
