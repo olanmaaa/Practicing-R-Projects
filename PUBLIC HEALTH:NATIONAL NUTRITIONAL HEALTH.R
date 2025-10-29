@@ -7,7 +7,7 @@ cleaned_nhanes <- replace(nhanes.data, is.na(nhanes.data), 0)
 #viewing data summary 
 summary(cleaned_nhanes)
 
-#creating histograms to visualize the distribution of BMI, Weight(in kg), Weight (in lbs)
+#creating histograms to visualize the distribution of BMI, Weight(in kg), Weight (in lbs) and Age
 #firstly create a new column in the df to represent Weight in pounds i.e Weight in kg * 2.2
 cleaned_nhanes$WeightInPounds <- cleaned_nhanes$Weight * 2.2
 #using par(mfrow) to create a grid layout for the four plots
