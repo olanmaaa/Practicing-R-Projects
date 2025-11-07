@@ -48,6 +48,7 @@ hist(cleaned_nhanes$Age,
      ylab='Frequency', 
      col='steelblue', 
      border='black')
+#the grid of the distributions have been saved in the repository as 'DistributionsGrid'
 
 #determining the mean pulse for all participants
 mean_pulse <- mean(cleaned_nhanes$Pulse)
@@ -55,7 +56,7 @@ mean_pulse <- mean(cleaned_nhanes$Pulse)
 
 #determining the range of the Diastolic Blood Pressure across all participants
 range(cleaned_nhanes$BPDia)
-#the range is 0-116
+#the range of Diastolic Blood Pressure is 0-116
 
 #determining the variance and standard deviation of income across all participants 
 income_variance <- var(cleaned_nhanes$Income)
@@ -74,6 +75,7 @@ ggplot(cleaned_nhanes,
 + labs(title='Weight vs Height Colored by Diabetes Status', 
        x='Height', y='Weight') 
 + theme_minimal()
+#the scatterplot of the relationship has been saved in the repository as 'WHScatterplot'
 
 #conducting t-test between the following variables:
 #Age and Gender
