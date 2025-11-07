@@ -1,7 +1,11 @@
 #public health: national nutritional health
 #importing data set
 nhanes.data <- (read.csv("https://raw.githubusercontent.com/HackBio-Internship/public_datasets/main/R/nhanes.csv"))
-#replacing all missing data with '0' 
+#understanding the data structure of the dataset
+str(nhanes.data)
+#the dataset is a data frame composed of 5000 observations of 32 variables
+
+#replacing all missing data in the dataframe with '0' 
 cleaned_nhanes <- replace(nhanes.data, is.na(nhanes.data), 0)
 
 #viewing data summary 
