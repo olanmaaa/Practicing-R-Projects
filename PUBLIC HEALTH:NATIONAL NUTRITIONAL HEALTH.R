@@ -1,11 +1,15 @@
 #public health: national nutritional health
 #importing data set
 nhanes.data <- (read.csv("https://raw.githubusercontent.com/HackBio-Internship/public_datasets/main/R/nhanes.csv"))
-#understanding the data structure of the dataset
+#understanding the structure of the dataset
 str(nhanes.data)
-#the dataset is a data frame composed of 5000 observations of 32 variables
+#the dataset is a data frame composed of 5000 observations across 32 variables amounting to a total of 160,000 variables
 
-#replacing all missing data in the dataframe with '0' 
+#determining the total number of missing data signified by 'N/A' in the datafame
+sum(is.na(nhanes.data))
+#there are a total of 33,931 missing data from the data set 
+
+#replacing all missing data signified by 'N/A' in the dataframe with '0' 
 cleaned_nhanes <- replace(nhanes.data, is.na(nhanes.data), 0)
 
 #viewing data summary 
@@ -48,7 +52,7 @@ hist(cleaned_nhanes$Age,
      ylab='Frequency', 
      col='steelblue', 
      border='black')
-#the grid of the distributions have been saved in the repository as 'DistributionsGrid'
+#the grid of the distributions has been saved in the repository as 'DistributionsGrid'
 
 #determining the mean pulse for all participants
 mean_pulse <- mean(cleaned_nhanes$Pulse)
@@ -85,7 +89,25 @@ ggplot(cleaned_nhanes,
 
 #Age and Gender
 t.test(Age ~ Gender, data = cleaned_nhanes)
+
 #BMI and Diabetes
+#due to the presence of missing data denoted by "0" in the Diabetes column
+#it will be assumed that all missing data are indicative of no diabetes
+#to determine the total number of missing data
+sum(nhanes.data$Diabetes == '0')
+#the total number of missing data within the Diabetes column is 64
+cleaned_nhanes$Diabetes <- factor(ifelse(cleaned_nhanes$Diabetes %in% c("0", "No"), "No", "Yes"))
+t.test(BMI ~ Diabetes, data = cleaned_nhanes)
+
+#AlcoholYear and RelationshipStatus
+#due to the presence of missing data denoted by "0" in the Relationship Status column
+#it will be assumed that all missing data are indicative of not being in a relationship
+#to determine the total number of missing data
+sum(nhanes.data$RelationshipStatus == '0')
+#the total number of missing data within the Relationship Status is 1415
+cleaned_nhanes$RelationshipStatus <- factor(ifelse(cleaned_nhanes$RelationshipStatus %in% c('0','Single'), 'Single', 'Committed'))
+t.test (AlcoholYear ~ RelationshipStatus, data= cleaned_nhanes)
+
 
 
 
